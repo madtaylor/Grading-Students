@@ -52,17 +52,19 @@ def computeFinalGrades(grades):
                 gradesFinal.append(mean)
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
-g = [[-3,7,12], [-3,-3,12,-3], [2,4,9,7,12,4], [7]]
+#g = [[-3,7,12], [-3,-3,12,-3], [2,4,9,7,12,4], [7]]
 #print(computeFinalGrades(g))
-
 
 #function to plot the given data
 def gradesPlot(grades):
-#PLOTTING THE BAR CHART    
+    #transposing the matrix
+    grade=np.array(grades)
+    t=grade.transpose()
+    
+    #PLOTTING THE BAR CHART
     
     #sets the data to be used for the bar chart as the vector given by the final grades function
     gradesFinal=computeFinalGrades(grades)
-    
     #sets the value associated with each grade as zero
     grades3=0
     grades00=0
@@ -96,12 +98,41 @@ def gradesPlot(grades):
     plt.ylabel('Number of students')
     plt.title('Final Grades')
     plt.show()
-
-#PLOTTING THE LINE GRAPH
-        
-
-
-
     
+#PLOTTING THE LINE GRAPH
+    x=1
+    count = []
+    for g in t:
+        count.append(x)
+        x += 1
+    x = x - 1
+    
+    #must be fixed for if there are more than two point at the same spot
+    for rows in t:
+        print(rows)
+        if (rows[rows==-3].shape[0]) > 1:
+            rows[int(((np.where(rows==-3))[0])[0])]=(rows[(((np.where(rows==-3))[0])[0])]) + 0.01
+        if (rows[rows==0].shape[0]) > 1:
+            rows[int(((np.where(rows==0))[0])[0])]=(rows[(((np.where(rows==0))[0])[0])]) + 0.01
+        if (rows[rows==2].shape[0]) > 1:
+            rows[int(((np.where(rows==2))[0])[0])]=(rows[(((np.where(rows==2))[0])[0])]) + 0.01
+        if (rows[rows==4].shape[0]) > 1:
+            rows[int(((np.where(rows==4))[0])[0])]=(rows[(((np.where(rows==4))[0])[0])]) + 0.01
+        if (rows[rows==7].shape[0]) > 1:
+            rows[int(((np.where(rows==7))[0])[0])]=(rows[(((np.where(rows==7))[0])[0])]) + 0.01
+        if (rows[rows==10].shape[0]) > 1:
+            rows[int(((np.where(rows==10))[0])[0])]=(rows[(((np.where(rows==10))[0])[0])]) + 0.01
+        if (rows[rows==12].shape[0]) > 1:
+            rows[int(((np.where(rows==12))[0])[0])]=(rows[(((np.where(rows==12))[0])[0])]) + 0.01
+            
+    plt.plot(count, t, "o")
+    plt.xlabel('Assignments')
+    plt.ylabel('Grades')
+    plt.title('Yearly Grades')
+    plt.show()
+
+
     return 'grades have been plotted'
-#print(gradesPlot(g))
+g = [[-3,7,12,4,7,7,2], [-3,-3,12,-3,12,10,4], [4,9,7,12,4,7,7], [7, 12,10,7,-3,7,12]]
+print(gradesPlot(g))
+
