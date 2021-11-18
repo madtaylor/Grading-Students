@@ -2,6 +2,7 @@
 
 #Importing libraries
 import numpy as np
+import matplotlib.pyplot as plt
 
 #Function to round each grade value to the nearest whole number grade
 def roundGrade(grades):
@@ -51,5 +52,56 @@ def computeFinalGrades(grades):
                 gradesFinal.append(mean)
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
-#g = [[-3,7,12], [-3,-3,12,-3], [2,4,9,7,12,4], [7]]
+g = [[-3,7,12], [-3,-3,12,-3], [2,4,9,7,12,4], [7]]
 #print(computeFinalGrades(g))
+
+
+#function to plot the given data
+def gradesPlot(grades):
+#PLOTTING THE BAR CHART    
+    
+    #sets the data to be used for the bar chart as the vector given by the final grades function
+    gradesFinal=computeFinalGrades(grades)
+    
+    #sets the value associated with each grade as zero
+    grades3=0
+    grades00=0
+    grades02=0
+    grades4=0
+    grades7=0
+    grades10=0
+    grades12=0
+    
+    #for loop to increase the number of students associated with each grade
+    for x in gradesFinal:
+        if x==-3:
+            grades3=grades3+1
+        if x==0:
+            grades00=grades00+1
+        if x==2:
+            grades02=grades02+1
+        if x==4:
+            grades4=grades4+1
+        if x==7:
+            grades7=grades7+1
+        if x==10:
+            grades10=grades10+1
+        if x==12:
+            grades12=grades12+1
+    
+    #Plotting the bar from the data and labling the chart
+    dataPoints = {'-3':grades3,'00':grades00,'02':grades02,'4':grades4,'7':grades7,'10':grades10,'12':grades12}
+    plt.bar(list(dataPoints.keys()),list(dataPoints.values()),color = 'pink', width = 0.4 )
+    plt.xlabel('7 point scale grades')
+    plt.ylabel('Number of students')
+    plt.title('Final Grades')
+    plt.show()
+
+#PLOTTING THE LINE GRAPH
+        
+
+
+
+    
+    return 'grades have been plotted'
+#print(gradesPlot(g))
