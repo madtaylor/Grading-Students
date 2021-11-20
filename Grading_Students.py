@@ -22,7 +22,7 @@ def roundGrade(grades):
         elif x>=8.5 and x<11:
             gradesRounded.append(10)
         elif x>=11 and x<=12:
-            gradesRounded.append(12)     
+            gradesRounded.append(12) 
     return gradesRounded
 #g = [1.2,12, 4.7, 6.8]
 #print(roundGrade(g))
@@ -134,5 +134,4 @@ def gradesPlot(grades):
 
     return 'grades have been plotted'
 g = [[-3,7,12,4,7,7,2], [-3,-3,12,-3,12,10,4], [4,9,7,12,4,7,7], [7, 12,10,7,-3,7,12]]
-print(gradesPlot(g))
-
+#print(gradesPlot(g))
