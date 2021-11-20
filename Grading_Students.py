@@ -3,6 +3,27 @@
 #Importing libraries
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+
+gradesfile = pd.read_csv('test1.csv')
+#Creating a matrix from the CSV file
+gradesmatrix = np.array(gradesfile)
+grades = gradesmatrix[:,2:]
+
+#function to change all invalid values
+def changeErrors(grades, changeto):
+
+    sizecol = np.size(grades[0,:])
+    sizerows = np.size(grades[:,0])
+    newgrds=[]
+    for grade in grades.flatten():
+        if grade==-3.0 or grade==0.0 or grade==2.0 or grade==4.0 or grade==7.0 or grade==10.0 or grade==12.0:
+            newgrds.append(grade)
+        else:
+            grade = changeto
+            newgrds.append(grade)
+    fixedgrades = np.reshape(newgrds,(sizerows,sizecol))
+    return fixedgrades
 
 #Function to round each grade value to the nearest whole number grade
 def roundGrade(grades):
@@ -24,41 +45,43 @@ def roundGrade(grades):
         elif x>=11 and x<=12:
             gradesRounded.append(12) 
     return gradesRounded
-#g = [1.2,12, 4.7, 6.8]
-#print(roundGrade(g))
+
 
 #Function to compute the final grade for each student
 def computeFinalGrades(grades):
     gradesFinal=[]
-    for x in grades:
-        if -3 in x:
-           gradesFinal.append(-3) 
-        else:
-            if len(x)==1:
-                finalGrade = x[0]
-                gradesFinal.append(finalGrade)
-            else:
-                #To remove the smallest value from the array
-                minimum = x[0]
-                for a in x:
-                    if a < minimum:
-                        minimum = a
-                x.remove(minimum)
-                #To find the mean
-                total = 0
-                for b in x:
-                    total += b
-                mean=total/(len(x))
-                gradesFinal.append(mean)
+    grades1 = changeErrors(grades, 81)
+    for i in grades1: 
+      if -3 in i:
+          gradesFinal.append(-3)
+      else:         
+          count=0
+          #determining the number of assignments in the array
+          for x in i:
+              if x == 81:
+                  count=count+1
+          #if there is only assignment      
+          assignmentNo = len(i)-count
+          if assignmentNo == 1:
+              for x in i:
+                  if x!=81:
+                      np.append(gradesFinal,x)
+          #if there is greater than 1 assignment        
+          elif assignmentNo >1:
+              Mhigh=[]
+              for x in i:
+                  if x!=81 and x > np.amin(i) and np.amin(i)!=-3:
+                      Mhigh.append(x)                      
+              mean = np.sum(Mhigh)/(len(i)-1)
+              gradesFinal.append(mean)
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
-#g = [[-3,7,12], [-3,-3,12,-3], [2,4,9,7,12,4], [7]]
-#print(computeFinalGrades(g))
+
 
 #function to plot the given data
 def gradesPlot(grades):
     #transposing the matrix
-    grade=np.array(grades)
+    grade=changeErrors(grades,np.nan)
     t=grade.transpose()
     
     #PLOTTING THE BAR CHART
@@ -109,7 +132,6 @@ def gradesPlot(grades):
     
     #must be fixed for if there are more than two point at the same spot
     for rows in t:
-        print(rows)
         if (rows[rows==-3].shape[0]) > 1:
             rows[int(((np.where(rows==-3))[0])[0])]=(rows[(((np.where(rows==-3))[0])[0])]) + 0.01
         if (rows[rows==0].shape[0]) > 1:
@@ -133,5 +155,6 @@ def gradesPlot(grades):
 
 
     return 'grades have been plotted'
-g = [[-3,7,12,4,7,7,2], [-3,-3,12,-3,12,10,4], [4,9,7,12,4,7,7], [7, 12,10,7,-3,7,12]]
-#print(gradesPlot(g))
+
+
+print(computeFinalGrades(grades))

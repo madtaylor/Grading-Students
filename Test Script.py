@@ -11,11 +11,7 @@ gradesfile = pd.read_csv('test1.csv')
 #Creating a matrix from the CSV file
 gradesmatrix = np.array(gradesfile)
 grades = gradesmatrix[:,2:]
-#print(gradesmatrix)
-#print(grades)
-#print(np.nan)
-
-#print(computeFinalGrades(grades))
+print(np.amin(i)
 
 def changeErrors(grades, changeto):
     sizecol = np.size(grades[0,:])
@@ -32,6 +28,30 @@ def changeErrors(grades, changeto):
     #print(np.reshape(newgrds,(sizerows,sizecol)))
     fixedgrades = np.reshape(newgrds,(sizerows,sizecol))
     return fixedgrades
-#print(grades.flatten())
-print(changeErrors(grades,81.3))
-#print(np.reshape(grades, -1))
+
+#original compute final grades function
+def computeFinalGrades(grades):
+    gradesFinal=[]
+    for x in grades:
+        if -3 in x:
+           gradesFinal.append(-3) 
+        else:
+            if len(x)==1:
+                finalGrade = x[0]
+                gradesFinal.append(finalGrade)
+            else:
+                #To remove the smallest value from the array
+                minimum = x[0]
+                for a in x:
+                    if a < minimum:
+                        minimum = a
+                x.remove(minimum)
+                #To find the mean
+                total = 0
+                for b in x:
+                    total += b
+                mean=total/(len(x))
+                gradesFinal.append(mean)
+    gradesFinal = roundGrade(gradesFinal)
+    return gradesFinal
+
