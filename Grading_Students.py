@@ -50,30 +50,20 @@ def roundGrade(grades):
 #Function to compute the final grade for each student
 def computeFinalGrades(grades):
     gradesFinal=[]
-    grades1 = changeErrors(grades, 81)
-    for i in grades1: 
-      if -3 in i:
-          gradesFinal.append(-3)
-      else:         
-          count=0
-          #determining the number of assignments in the array
-          for x in i:
-              if x == 81:
-                  count=count+1
-          #if there is only assignment      
-          assignmentNo = len(i)-count
-          if assignmentNo == 1:
-              for x in i:
-                  if x!=81:
-                      np.append(gradesFinal,x)
-          #if there is greater than 1 assignment        
-          elif assignmentNo >1:
-              Mhigh=[]
-              for x in i:
-                  if x!=81 and x > np.amin(i) and np.amin(i)!=-3:
-                      Mhigh.append(x)                      
-              mean = np.sum(Mhigh)/(len(i)-1)
-              gradesFinal.append(mean)
+    grades1 = changeErrors(grades, 900)
+    srted = np.sort(grades1)
+    for i in srted:
+        if -3 in i:
+            gradesFinal.append(-3)
+        else:
+            iclean= i[i!=900]
+            if np.size(iclean) == 1:
+                gradesFinal.append(np.mean(iclean))
+            
+            if np.size(iclean) > 1:
+                    mhigh = iclean[1:]
+                    mean = np.mean(mhigh)
+                    gradesFinal.append(mean)  
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
 

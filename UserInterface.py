@@ -9,6 +9,7 @@ from Grading_Students import roundGrade
 from Grading_Students import computeFinalGrades
 from Grading_Students import gradesPlot
 from Grading_Students import changeErrors
+from DisplayGradesTable import tabulateGrades
 
 #Function to display The user interface
 def displayInterface():
@@ -71,6 +72,8 @@ while loop:
 #-----4.Display Table of Grades-----
     if selection == 4:
         print('Display Grades has been selected!')
+        tabulateGrades(gradesfile)
+        
         
 
 
