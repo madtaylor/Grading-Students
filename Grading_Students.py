@@ -4,6 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import random
 
 gradesfile = pd.read_csv('test1.csv')
 #Creating a matrix from the CSV file
@@ -122,39 +123,134 @@ def gradesPlot(grades):
     plt.title('Final Grades')
     plt.show()
     
-#PLOTTING THE LINE GRAPH
+    #PLOTTING THE LINE GRAPH
     x=1
     count = []
+    segment = []
     for g in t:
-        count.append(x)
+        for f in g:
+            segment.append(x)
+        count.append(segment)
+        segment = []
         x += 1
-    x = x - 1
+    t = t.astype('float64')
+    print(t)                                  
+    t2 = []
+    index1 = 0
+    index2 = 0
+    for lines in t:
+        rows = lines
+        if np.count_nonzero(rows==-3)>1:
+            index = 0
+            for x in rows:
+                if x==-3:
+                    new = -3 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==0)>1:
+            index = 0
+            for x in rows:
+                if x==0:
+                    new = 0 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==2)>1:
+            index = 0
+            for x in rows:
+                if x==2:
+                    new = 2 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==4)>1:
+            index = 0
+            for x in rows:
+                if x==4:
+                    new = 4 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==7)>1:
+            index = 0
+            for x in rows:
+                if x==7:
+                    new = 7 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==10)>1:
+            index = 0
+            for x in rows:
+                if x==10:
+                    new = 10 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        index2 = 0
+        if np.count_nonzero(rows==12)>1:
+            index = 0
+            for x in rows:
+                if x==12:
+                    new = 12 + random.uniform(-0.1,0.1)
+                    rows[index] = new
+                    count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
+                index += 1
+                index2 += 1
+        t2.append(rows)
+        index1 += 1
+        index2 = 0
+    t2 = np.array(t2)
+    print(t2)
+    print(count)
+    yy = []
+    for c in t2:
+        yy.append(c)
+    '''
+    x=1
+    count2 = []
+    segment = []
+    for g in t:
+        for f in g:
+            segment.append(x)
+        count2.append(segment)
+        segment = []
+        x += 1
+    count3 = []
+    for c in count2:
+        for d in c:
+            count3.append(d)
+    yy2 = []
+    for c in yy:
+        for d in c:
+           yy2.append(d) 
+    print(count3)
+    print(yy2)
     
-    #must be fixed for if there are more than two point at the same spot
-    for rows in t:
-        if (rows[rows==-3].shape[0]) > 1:
-            rows[int(((np.where(rows==-3))[0])[0])]=(rows[(((np.where(rows==-3))[0])[0])]) + 0.01
-        if (rows[rows==0].shape[0]) > 1:
-            rows[int(((np.where(rows==0))[0])[0])]=(rows[(((np.where(rows==0))[0])[0])]) + 0.01
-        if (rows[rows==2].shape[0]) > 1:
-            rows[int(((np.where(rows==2))[0])[0])]=(rows[(((np.where(rows==2))[0])[0])]) + 0.01
-        if (rows[rows==4].shape[0]) > 1:
-            rows[int(((np.where(rows==4))[0])[0])]=(rows[(((np.where(rows==4))[0])[0])]) + 0.01
-        if (rows[rows==7].shape[0]) > 1:
-            rows[int(((np.where(rows==7))[0])[0])]=(rows[(((np.where(rows==7))[0])[0])]) + 0.01
-        if (rows[rows==10].shape[0]) > 1:
-            rows[int(((np.where(rows==10))[0])[0])]=(rows[(((np.where(rows==10))[0])[0])]) + 0.01
-        if (rows[rows==12].shape[0]) > 1:
-            rows[int(((np.where(rows==12))[0])[0])]=(rows[(((np.where(rows==12))[0])[0])]) + 0.01
-            
-    plt.plot(count, t, "o")
+    x = np.array(count3)
+    y = np.array(yy2)
+    m, b = np.polyfit(x, y, 1)
+    '''
+    plt.plot(count, yy, "o")
+    #plt.plot(x, m*x + b)
     plt.xlabel('Assignments')
     plt.ylabel('Grades')
-    plt.title('Yearly Grades')
+    plt.title('Grades Throughout the School Year')
     plt.show()
 
+    return ' '
 
-    return 'grades have been plotted'
 
-
-print(computeFinalGrades(grades))
+print(gradesPlot(grades))
