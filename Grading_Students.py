@@ -146,5 +146,3 @@ def gradesPlot(grades):
 
     return 'grades have been plotted'
 
-
-print(computeFinalGrades(grades))

@@ -58,7 +58,8 @@ while loop:
         
 #----2.Check For Errors-----
     if selection == 2:
-        print('Check For Errors as been selected!')
+        if np.array_equal(grades,gradesEmpty):
+            print('Error! Load data as not been selected!')
         
         
 
