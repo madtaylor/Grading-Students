@@ -5,14 +5,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import random
+import math
 
-gradesfile = pd.read_csv('grades.txt')
-
-# gradesfile = pd.read_csv('test1.csv')
+#gradesfile = pd.read_csv('test2.csv')
 
 #Creating a matrix from the CSV file
-# gradesmatrix = np.array(gradesfile)
-# grades = gradesmatrix[:,2:]
+#gradesmatrix = np.array(gradesfile)
+#grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
 def changeErrors(grades, changeto):
@@ -217,13 +216,20 @@ def gradesPlot(grades):
 
     averages = []
     for values in s:
+        length = 0
         total = 0
         for num in values:
-            total += num
-        average = total / len(values)
-        averages.append(average)
+            #num = str(num)
+            is_NaN = math.isnan(num)
+            if is_NaN != True:
+                total += num
+                length += 1
+        if length == 0:
+            averages.append(-3)
+        else:
+            average = total / length
+            averages.append(average)
     #Creating an array that find the average grade for each assignment
-    print(averages)
     
     x=0
     assignments = []
