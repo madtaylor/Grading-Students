@@ -22,6 +22,7 @@ def displayInterface():
     
 grades = []
 gradesEmpty = []    
+studentname = []
 loop=True
 
 while loop:
@@ -55,10 +56,35 @@ while loop:
         print('Number of students:',np.size(grades[:,0]))
         print('Number of Assignments:',np.size(grades[0,:]))
         
+      
 #----2.Check For Errors-----
     if selection == 2:
+        #checking if there are student number repeats
         print('Check For Errors as been selected!')
+        x1 = input("Would you like to see if two students have the same student ID?")
+        while ((x1.lower()!='yes') and (x1.lower()!='no')):
+            try: 
+                x1=input('Error, please input yes or no: ')
+            except ValueError:
+                    pass
+            #carry out function when yes
+        if x1.lower()== "yes":
+            df = pd.DataFrame(gradesfile, columns= ['StudentID'])
+            if (duplicated := df.duplicated(keep=False)).any():
+                some_duplicates = df[duplicated].sort_values(by=df.columns.to_list()).head()
+                print("The student number below is repeated:", some_duplicates)
+        if x1.lower()=="no":
+            pass
         
+        #checking to see if any grades do not fall on the 7 grade scale
+        x2 = input("Would you like to see if any grades do not fall on the 7 grade scale? ")
+        while ((x2.lower()!='yes') and (x2.lower()!='no')):
+            try: 
+                x2=input('Error, please input yes or no: ')
+            except ValueError:
+                    pass
+        if x2.lower()== "yes":
+            
         
 
 
@@ -67,6 +93,8 @@ while loop:
     if selection == 3:
         print('Generate plots has been selected!')
         print(gradesPlot(grades))
+
+
 
 #-----4.Display Table of Grades-----
     if selection == 4:
@@ -83,4 +111,3 @@ while loop:
         
         
         
-    
