@@ -9,11 +9,12 @@ from Grading_Students import roundGrade
 from Grading_Students import computeFinalGrades
 from Grading_Students import gradesPlot
 from Grading_Students import changeErrors
+from DisplayGradesTable import tabulateGrades
 
 #Function to display The user interface
 def displayInterface():
     print(20*"-","Welcome to the action menu!",20*"-")
-    print("1. Load Data")
+    print("1. Load New Data")
     print("2. Check for Errors")
     print("3. Generate Plots")
     print("4. Display List of Grades")
@@ -24,6 +25,22 @@ grades = []
 gradesEmpty = []    
 studentname = []
 loop=True
+
+filename = input('Please input the name of the csv file you wish to use:')
+while not(os.path.isfile(filename)):
+    try:
+        filename = input('File not found. Please input valid CSV filename:')
+    except ValueError:
+        pass
+#Loading data        
+gradesfile = pd.read_csv(filename)
+        
+#Creating a matrix from the CSV file
+gradesmatrix = np.array(gradesfile)
+grades = gradesmatrix[:,2:]
+print('Data Loaded successfully!')
+print('Number of students:',np.size(grades[:,0]))
+print('Number of Assignments:',np.size(grades[0,:]))
 
 while loop:
     displayInterface()
@@ -83,7 +100,7 @@ while loop:
                 x2=input('Error, please input yes or no: ')
             except ValueError:
                     pass
-        if x2.lower()== "yes":
+        # x2.lower()== "yes":
             
         
 
@@ -99,6 +116,7 @@ while loop:
 #-----4.Display Table of Grades-----
     if selection == 4:
         print('Display Grades has been selected!')
+        tabulateGrades(gradesfile)
         
 
 
@@ -106,7 +124,7 @@ while loop:
 #-----5.Quit-----
     if selection == 5:
         print('Thank you!🙂')
-        
+        print(grades)
         break
         
         

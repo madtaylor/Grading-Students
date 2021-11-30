@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import random
 
-gradesfile = pd.read_csv('test1.csv')
+# gradesfile = pd.read_csv('test1.csv')
 #Creating a matrix from the CSV file
-gradesmatrix = np.array(gradesfile)
-grades = gradesmatrix[:,2:]
+# gradesmatrix = np.array(gradesfile)
+# grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
 def changeErrors(grades, changeto):
@@ -51,30 +51,20 @@ def roundGrade(grades):
 #Function to compute the final grade for each student
 def computeFinalGrades(grades):
     gradesFinal=[]
-    grades1 = changeErrors(grades, 81)
-    for i in grades1: 
-      if -3 in i:
-          gradesFinal.append(-3)
-      else:         
-          count=0
-          #determining the number of assignments in the array
-          for x in i:
-              if x == 81:
-                  count=count+1
-          #if there is only assignment      
-          assignmentNo = len(i)-count
-          if assignmentNo == 1:
-              for x in i:
-                  if x!=81:
-                      np.append(gradesFinal,x)
-          #if there is greater than 1 assignment        
-          elif assignmentNo >1:
-              Mhigh=[]
-              for x in i:
-                  if x!=81 and x > np.amin(i) and np.amin(i)!=-3:
-                      Mhigh.append(x)                      
-              mean = np.sum(Mhigh)/(len(i)-1)
-              gradesFinal.append(mean)
+    grades1 = changeErrors(grades, 900)
+    srted = np.sort(grades1)
+    for i in srted:
+        if -3 in i:
+            gradesFinal.append(-3)
+        else:
+            iclean= i[i!=900]
+            if np.size(iclean) == 1:
+                gradesFinal.append(np.mean(iclean))
+            
+            if np.size(iclean) > 1:
+                    mhigh = iclean[1:]
+                    mean = np.mean(mhigh)
+                    gradesFinal.append(mean)  
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
 
@@ -134,7 +124,7 @@ def gradesPlot(grades):
         segment = []
         x += 1
     t = t.astype('float64')
-    print(t)                                  
+    # print(t)                                  
     t2 = []
     index1 = 0
     index2 = 0
@@ -213,8 +203,8 @@ def gradesPlot(grades):
         index1 += 1
         index2 = 0
     t2 = np.array(t2)
-    print(t2)
-    print(count)
+    # print(t2)
+    # print(count)
     yy = []
     for c in t2:
         yy.append(c)
@@ -253,4 +243,4 @@ def gradesPlot(grades):
     return ' '
 
 
-print(gradesPlot(grades))
+# print(gradesPlot(grades))
