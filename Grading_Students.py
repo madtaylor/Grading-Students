@@ -10,8 +10,8 @@ import math
 #gradesfile = pd.read_csv('test2.csv')
 
 #Creating a matrix from the CSV file
-gradesmatrix = np.array(gradesfile)
-grades = gradesmatrix[:,2:]
+#gradesmatrix = np.array(gradesfile)
+#grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
 def changeErrors(grades, changeto):
