@@ -1,4 +1,4 @@
-#Isabella del Furia , Akira Miranda Adeniran-Lowe (s215117), and Madeleine Taylor (s215234)
+#Isabella del Furia (s215138) , Akira Miranda Adeniran-Lowe (s215170), and Madeleine Taylor (s215234)
 
 #Importing libraries
 import numpy as np
@@ -7,11 +7,6 @@ import pandas as pd
 import random
 import math
 
-#gradesfile = pd.read_csv('test2.csv')
-
-#Creating a matrix from the CSV file
-#gradesmatrix = np.array(gradesfile)
-#grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
 #Responsible group member: Akira
