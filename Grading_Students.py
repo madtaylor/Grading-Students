@@ -247,5 +247,3 @@ def gradesPlot(grades):
     plt.show()
 
     return ' '
-
-print(gradesPlot(grades))
