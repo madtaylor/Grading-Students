@@ -26,10 +26,10 @@ gradesEmpty = []
 studentname = []
 loop=True
 
-filename = input('Please input the name of the csv file you wish to use:')
+filename = input('Please input the name of the csv file you wish to use: ')
 while not(os.path.isfile(filename)):
     try:
-        filename = input('File not found. Please input valid CSV filename:')
+        filename = input('File not found. Please input valid CSV filename: ')
     except ValueError:
         pass
 #Loading data        
@@ -70,9 +70,9 @@ while loop:
         gradesmatrix = np.array(gradesfile)
         grades = gradesmatrix[:,2:]
         print('Data Loaded successfully!')
-        print('Number of students:',np.size(grades[:,0]))
-        print('Number of Assignments:',np.size(grades[0,:]))
-        
+        print('Number of students: ',np.size(grades[:,0]))
+        print('Number of Assignments: ',np.size(grades[0,:]))
+        print(" ")
       
 #----2.Check For Errors-----
     if selection == 2:
@@ -91,20 +91,20 @@ while loop:
             #Oupouts duplicates found in the column "StudentID"
             if (duplicated := df.duplicated(keep=False)).any():
                 some_duplicates = df[duplicated].sort_values(by=df.columns.to_list()).head()
-                print("The student number below has been found multiple times in the data", some_duplicates)
+                print("The student number(s) below has been found multiple times in the data: ", some_duplicates)
                 notErrors = False
             if notErrors == True:
                 print("No student numbers have been found to be repeated")
-            if notErrors == False:
-                y1 = input("Would you like to remove the duplicated student IDs and display data with out repeats?") 
+            elif notErrors == False:
+                y1 = input("Would you like to remove the duplicated student IDs and display data with out repeats? " ) 
                 while ((y1.lower()!='yes') and (y1.lower()!='no')):
                      try: 
                          y1=input('Error, please input yes or no: ')
                      except ValueError:
                          pass
-            if y1.lower() == "yes":
-                dropped_duplicates = df.drop_duplicates(subset=['StudentID'], keep='last')
-                print(dropped_duplicates)
+                if y1.lower() == "yes":
+                    dropped_duplicates = df.drop_duplicates(subset=['StudentID'], keep='last')
+                    print(dropped_duplicates)
             
                 
         if x1.lower()== "no":
@@ -121,16 +121,17 @@ while loop:
             noError = True
             for i in grades.flatten():
                 if (i != -3) and (i != 0) and (i != 2) and (i != 4) and (i != 7) and (i!=10) and (i != 12):
-                    print("Invalid grade has been found", [i])
+                    print("Invalid grade(s) has been found: ", [i])
                     noError = False
             if noError == True:
-                print("No invalid grades have been found.")
+                print("No invalid grade(s) have been found.")
 
 #-----3.Generate Plots-----
     if selection == 3:
         print('Generate plots has been selected!')
-        print(gradesPlot(grades))
-
+        gradesPlot(grades)
+        print("Grades have been plotted!")
+        
 
 
 #-----4.Display Table of Grades-----
@@ -143,7 +144,9 @@ while loop:
 
 #-----5.Quit-----
     if selection == 5:
-        print('Thank you!🙂')
+        print(" ")
+        print("Thank you for using our program!")
+        print("Sincerely, Akira, Isabella and Madeleine 🙂")
         break
         
         

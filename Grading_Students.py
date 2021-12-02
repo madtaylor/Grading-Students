@@ -248,4 +248,3 @@ def gradesPlot(grades):
 
     return ' '
 
-print(gradesPlot(grades))
