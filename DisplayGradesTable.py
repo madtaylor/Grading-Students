@@ -40,6 +40,7 @@ def tabulateGrades(gradesfile):
     colno = len(gradesdf.columns)
     gradesdf.insert(colno, 'Final Grades',finalgrades)
     
+    #sorts the dataframe alphabetically
     gradesdf = gradesdf.sort_values('Name')
     #opens the HTML file index and writes the code for the table of data values using the CSS stylesheet to style the table and opens it in the user's browser.
     with open('index.html', 'w') as f:
