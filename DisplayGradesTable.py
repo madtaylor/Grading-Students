@@ -1,6 +1,8 @@
 
 
-    
+#-------- Function to make HTML table from the chosen data set, takes the chosen file as an input-------   
+#Responsible Group Member: Akira-Miranda Adeniran-Lowe s215170
+
 #Importing Libraries
 import numpy as np
 import pandas as pd
@@ -24,7 +26,7 @@ html_string = '''
 </html>.
 '''
 
-#-------- Function to make HTML table from the chosen data set, takes the chosen file as an input.-------
+
 
 def tabulateGrades(gradesfile):
     

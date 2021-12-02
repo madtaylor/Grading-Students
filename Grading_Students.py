@@ -1,4 +1,4 @@
-#Isabella del Furia, Akira Miranda Adeniran-Lowe, and Madeleine Taylor
+#Isabella del Furia , Akira Miranda Adeniran-Lowe (s215117), and Madeleine Taylor (s215234)
 
 #Importing libraries
 import numpy as np
@@ -14,6 +14,7 @@ import math
 #grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
+#Responsible group member: Akira
 def changeErrors(grades, changeto):
 
     sizecol = np.size(grades[0,:])
@@ -29,6 +30,7 @@ def changeErrors(grades, changeto):
     return fixedgrades
 
 #Function to round each grade value to the nearest whole number grade
+#Responsible group member: Madeleine
 def roundGrade(grades):
     grades = np.array(grades)
     gradesRounded = []
@@ -50,28 +52,34 @@ def roundGrade(grades):
     return gradesRounded
 
 #Function to compute the final grade for each student
+#Responsible group member: Akira and Madeleine
 def computeFinalGrades(grades):
     gradesFinal=[]
     grades1 = changeErrors(grades, 900)
     srted = np.sort(grades1)
     for i in srted:
+        #for when there is a -3 in the student's grade set
         if -3 in i:
             gradesFinal.append(-3)
         else:
             iclean= i[i!=900]
+            #if the student only has 1 grade
             if np.size(iclean) == 1:
                 gradesFinal.append(np.mean(iclean))
-            
+            #if the student has more than 1 grade, finding the mean
             if np.size(iclean) > 1:
                     mhigh = iclean[1:]
                     mean = np.mean(mhigh)
                     gradesFinal.append(mean)  
+    #rounding the grades to be on the 7 step scale
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
 
 #function to plot the given data
+#Responsible group member for the bar graph: Isabella and Madeleine
+#Responsible group member for the line graph with average line: Madeleine
 def gradesPlot(grades):
-    #transposing the matrix
+    #transposing the matrix so that all the grades per assignment are in their own array
     grade=changeErrors(grades,np.nan)
     t=grade.transpose()
     s=grade.transpose()
@@ -81,30 +89,30 @@ def gradesPlot(grades):
     #sets the data to be used for the bar chart as the vector given by the final grades function
     gradesFinal=computeFinalGrades(grades)
     #sets the value associated with each grade as zero
-    grades3=0
-    grades00=0
-    grades02=0
-    grades4=0
-    grades7=0
-    grades10=0
-    grades12=0
+    grades3 = 0
+    grades00 = 0
+    grades02 = 0
+    grades4 = 0
+    grades7 = 0
+    grades10 = 0
+    grades12 = 0
     
     #for loop to increase the number of students associated with each grade
     for x in gradesFinal:
         if x==-3:
-            grades3=grades3+1
+            grades3 += 1
         if x==0:
-            grades00=grades00+1
+            grades00 += 1
         if x==2:
-            grades02=grades02+1
+            grades02 += 1
         if x==4:
-            grades4=grades4+1
+            grades4 += 1
         if x==7:
-            grades7=grades7+1
+            grades7 += 1
         if x==10:
-            grades10=grades10+1
+            grades10 += 1
         if x==12:
-            grades12=grades12+1
+            grades12 += 1
     
     #Plotting the bar from the data and labling the chart
     dataPoints = {'-3':grades3,'00':grades00,'02':grades02,'4':grades4,'7':grades7,'10':grades10,'12':grades12}
@@ -115,6 +123,7 @@ def gradesPlot(grades):
     plt.show()
     
     #PLOTTING THE LINE GRAPH
+    
     #Creating an array of x values where each subarray corresponds to the assignment number and its length equals the amount of students
     x=1
     count = []
@@ -125,25 +134,30 @@ def gradesPlot(grades):
         count.append(segment)
         segment = []
         x += 1
-        
+    
+    #resetting the array type so that can include decimals
     t = t.astype('float64')
 
     t2 = []
     index1 = 0
     index2 = 0
-    #Fixing points that are on top of each other
+    #fixing points that are on top of each other
     for lines in t:
         rows = lines
+        #checking to see if there is more than 1 grade that equals -3
         if np.count_nonzero(rows==-3)>1:
             index = 0
             for x in rows:
                 if x==-3:
                     #adding a random number between 0 and 0.1
                     new = -3 + random.uniform(-0.1,0.1)
+                    #resetting the value in the array to be changede by +/- 0.1
                     rows[index] = new
+                    #changing the corresponding y value
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 0
         index2 = 0
         if np.count_nonzero(rows==0)>1:
             index = 0
@@ -154,6 +168,7 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 2
         index2 = 0
         if np.count_nonzero(rows==2)>1:
             index = 0
@@ -164,6 +179,7 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 4
         index2 = 0
         if np.count_nonzero(rows==4)>1:
             index = 0
@@ -174,6 +190,7 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 7
         index2 = 0
         if np.count_nonzero(rows==7)>1:
             index = 0
@@ -184,6 +201,7 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 10
         index2 = 0
         if np.count_nonzero(rows==10)>1:
             index = 0
@@ -194,6 +212,7 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #same as above but for if there is more than 1 grade that equals 12
         index2 = 0
         if np.count_nonzero(rows==12)>1:
             index = 0
@@ -214,33 +233,40 @@ def gradesPlot(grades):
     for c in t2:
         yy.append(c)
 
+    #CREATING THE AVERAGE LINE
+    
+    #Creating an array that find the average grade for each assignment
     averages = []
     for values in s:
         length = 0
         total = 0
         for num in values:
-            #num = str(num)
+            #checking and fixing averages with nan values
             is_NaN = math.isnan(num)
             if is_NaN != True:
                 total += num
                 length += 1
         if length == 0:
+            #if there are no grades for an assignment, the average is -3
             averages.append(-3)
         else:
+            #calculating the mean
             average = total / length
+            #appending the mean to the array of averages
             averages.append(average)
-    #Creating an array that find the average grade for each assignment
     
+    #making an array that includes an integer corresponding to each assignment
     x=0
     assignments = []
     for g in t:
         x += 1
         assignments.append(x)
-    #Making an array that includes an integer corresponding to each assignment
     
-    #Plotting the actual graph with an average line and titles
+    #plotting the scatter plot
     plt.plot(count, yy, "o")
+    #plotting the average line
     plt.plot(assignments, averages)
+    #creating titles for each axis on the graph
     plt.xlabel('Assignments')
     plt.ylabel('Grades')
     plt.title('Grades Throughout the School Year')
