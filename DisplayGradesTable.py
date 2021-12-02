@@ -1,6 +1,8 @@
 
 
-    
+#-------- Function to make HTML table from the chosen data set, takes the chosen file as an input-------   
+#Responsible Group Member: Akira-Miranda Adeniran-Lowe s215170
+
 #Importing Libraries
 import numpy as np
 import pandas as pd
@@ -24,7 +26,7 @@ html_string = '''
 </html>.
 '''
 
-#-------- Function to make HTML table from the chosen data set, takes the chosen file as an input.-------
+
 
 def tabulateGrades(gradesfile):
     
@@ -39,6 +41,9 @@ def tabulateGrades(gradesfile):
     finalgrades = computeFinalGrades(grades)
     colno = len(gradesdf.columns)
     gradesdf.insert(colno, 'Final Grades',finalgrades)
+    
+    #sorts the dataframe alphabetically
+    gradesdf = gradesdf.sort_values('Name')
     
     #opens the HTML file index and writes the code for the table of data values using the CSS stylesheet to style the table and opens it in the user's browser.
     with open('index.html', 'w') as f:
