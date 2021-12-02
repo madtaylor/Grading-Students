@@ -1,14 +1,14 @@
 #Importing Libraries
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import os.path
+from colorama import init, Back, Style
+
+init(autoreset=True, convert=True)
+os.system('cls' if os.name == 'nt' else 'clear')
 
 #Importing Functions
-from Grading_Students import roundGrade
-from Grading_Students import computeFinalGrades
 from Grading_Students import gradesPlot
-from Grading_Students import changeErrors
 from DisplayGradesTable import tabulateGrades
 
 #Function to display The user interface
@@ -29,7 +29,7 @@ loop=True
 filename = input('Please input the name of the csv file you wish to use: ')
 while not(os.path.isfile(filename)):
     try:
-        filename = input('File not found. Please input valid CSV filename: ')
+        filename = input(Back.RED + 'File not found. Please input valid CSV filename: ' + Style.RESET_ALL)
     except ValueError:
         pass
 #Loading data        
@@ -38,8 +38,10 @@ gradesfile = pd.read_csv(filename)
 #Creating a matrix from the CSV file
 gradesmatrix = np.array(gradesfile)
 grades = gradesmatrix[:,2:]
-print('Data Loaded successfully!')
+print(Back.GREEN + 'Data Loaded successfully!'+ Style.RESET_ALL)
+print(" ")
 print('Number of students:',np.size(grades[:,0]))
+print(" ")
 print('Number of Assignments:',np.size(grades[0,:]))
 
 while loop:
@@ -55,11 +57,11 @@ while loop:
 #------1.Load Data------
 
     if selection == 1:
-        print('Load Data has been selected!')
+        print(Back.GREEN + 'Load New Data has been selected!'+ Style.RESET_ALL)
         filename = input('Please enter the name of the CSV file you wish to use: ')
         while not(os.path.isfile(filename)):
             try:
-                filename = input('File not found. Please input valid CSV filename: ')
+                filename = input(Back.RED + 'File not found. Please input valid CSV filename: ' + Style.RESET_ALL)
             except ValueError:
                 pass
         
@@ -69,7 +71,7 @@ while loop:
         #Creating a matrix from the CSV file
         gradesmatrix = np.array(gradesfile)
         grades = gradesmatrix[:,2:]
-        print('Data Loaded successfully!')
+        print(Back.GREEN + 'Data Loaded successfully!' + Style.RESET_ALL)
         print('Number of students: ',np.size(grades[:,0]))
         print('Number of Assignments: ',np.size(grades[0,:]))
         print(" ")
@@ -77,11 +79,11 @@ while loop:
 #----2.Check For Errors-----
     if selection == 2:
         #checking if there are student number repeats
-        print('Check For Errors as been selected!')
+        print(Back.GREEN + 'Check For Errors as been selected!'+ Style.RESET_ALL)
         x1 = input("Would you like to see if two students have the same student ID? ")
         while ((x1.lower()!='yes') and (x1.lower()!='no')):
             try: 
-                x1=input('Error, please input yes or no: ')
+                x1=input(Back.RED + 'Error, please input yes or no: '+ Style.RESET_ALL )
             except ValueError:
                     pass
             #carry out function when yes
@@ -99,7 +101,7 @@ while loop:
                 y1 = input("Would you like to remove the duplicated student IDs and display data with out repeats? " ) 
                 while ((y1.lower()!='yes') and (y1.lower()!='no')):
                      try: 
-                         y1=input('Error, please input yes or no: ')
+                         y1=input(Back.RED + 'Error, please input yes or no: '+ Style.RESET_ALL )
                      except ValueError:
                          pass
                 if y1.lower() == "yes":
@@ -114,7 +116,7 @@ while loop:
         x2 = input("Would you like to see if any grades do not fall on the 7 grade scale? ")
         while ((x2.lower()!='yes') and (x2.lower()!='no')):
             try: 
-                x2=input('Error, please input yes or no: ')
+                x2=input(Back.RED + 'Error, please input yes or no: '+ Style.RESET_ALL)
             except ValueError:
                     pass
         if x2.lower()== "yes":
@@ -130,7 +132,7 @@ while loop:
     if selection == 3:
         print('Generate plots has been selected!')
         gradesPlot(grades)
-        print("Grades have been plotted!")
+        print(Back.GREEN + "Grades have been plotted!"+ Style.RESET_ALL)
         
 
 
@@ -138,7 +140,7 @@ while loop:
     if selection == 4:
         print('Display Grades has been selected!')
         tabulateGrades(gradesfile)
-        
+        print(Back.GREEN + 'Grades have been displayed in a seperate browser window.'+ Style.RESET_ALL)
 
 
 
