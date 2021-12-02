@@ -1,13 +1,15 @@
+#-----Main Script-------Responsible Group members: Isabella del Furia (s215138) , Akira Miranda Adeniran-Lowe (s215170)
+
+
+
 #Importing Libraries
 import numpy as np
 import pandas as pd
 import os.path
 from colorama import Back, Style
 
-
-
 #Importing Functions
-from Grading_Students import gradesPlot
+from Grading_Functions import gradesPlot
 from DisplayGradesTable import tabulateGrades
 
 #Function to display the user interface
@@ -25,12 +27,16 @@ gradesEmpty = []
 studentname = []
 loop=True
 
+#Asks the user to input a file name
 filename = input('Please input the name of the csv file you wish to use: ')
+
+#if the file can not be found an error message is shown and the user is asked to enter a valid filename
 while not(os.path.isfile(filename)):
     try:
         filename = input(Back.RED + 'File not found. Please input valid CSV filename: ' + Style.RESET_ALL)
     except ValueError:
         pass
+
 #Loading data        
 gradesfile = pd.read_csv(filename)
         
@@ -137,16 +143,12 @@ while loop:
         gradesPlot(grades)
         print("Grades have been plotted!")
         
-
-
 #-----4.Display Table of Grades-----
     #Displays table of grades 
     if selection == 4:
         print('Display Grades has been selected!')
         tabulateGrades(gradesfile)
         print('Grades have been displayed in a seperate browser window.')
-
-
 
 #-----5.Quit-----
     #Exits Program

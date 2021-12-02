@@ -9,7 +9,7 @@ import pandas as pd
 import webbrowser
 
 #Importing Functions
-from Grading_Students import computeFinalGrades
+from Grading_Functions import computeFinalGrades
 
 
 

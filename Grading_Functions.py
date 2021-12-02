@@ -3,7 +3,6 @@
 #Importing libraries
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 import random
 import math
 
@@ -267,5 +266,4 @@ def gradesPlot(grades):
     plt.title('Grades Throughout the School Year')
     plt.show()
 
-    return ' '
 
