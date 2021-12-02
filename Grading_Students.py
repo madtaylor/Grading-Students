@@ -5,11 +5,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import random
+import math
 
-# gradesfile = pd.read_csv('test1.csv')
+#gradesfile = pd.read_csv('test2.csv')
+
 #Creating a matrix from the CSV file
-# gradesmatrix = np.array(gradesfile)
-# grades = gradesmatrix[:,2:]
+#gradesmatrix = np.array(gradesfile)
+#grades = gradesmatrix[:,2:]
 
 #function to change all invalid values
 def changeErrors(grades, changeto):
@@ -47,7 +49,6 @@ def roundGrade(grades):
             gradesRounded.append(12) 
     return gradesRounded
 
-
 #Function to compute the final grade for each student
 def computeFinalGrades(grades):
     gradesFinal=[]
@@ -68,12 +69,12 @@ def computeFinalGrades(grades):
     gradesFinal = roundGrade(gradesFinal)
     return gradesFinal
 
-
 #function to plot the given data
 def gradesPlot(grades):
     #transposing the matrix
     grade=changeErrors(grades,np.nan)
     t=grade.transpose()
+    s=grade.transpose()
     
     #PLOTTING THE BAR CHART
     
@@ -114,6 +115,7 @@ def gradesPlot(grades):
     plt.show()
     
     #PLOTTING THE LINE GRAPH
+    #Creating an array of x values where each subarray corresponds to the assignment number and its length equals the amount of students
     x=1
     count = []
     segment = []
@@ -123,17 +125,20 @@ def gradesPlot(grades):
         count.append(segment)
         segment = []
         x += 1
+        
     t = t.astype('float64')
-    # print(t)                                  
+
     t2 = []
     index1 = 0
     index2 = 0
+    #Fixing points that are on top of each other
     for lines in t:
         rows = lines
         if np.count_nonzero(rows==-3)>1:
             index = 0
             for x in rows:
                 if x==-3:
+                    #adding a random number between 0 and 0.1
                     new = -3 + random.uniform(-0.1,0.1)
                     rows[index] = new
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
@@ -199,48 +204,46 @@ def gradesPlot(grades):
                     count[index1][index2] = count[index1][index2] + random.uniform(-0.1,0.1)
                 index += 1
                 index2 += 1
+        #Appending the changed values in each row to a new array
         t2.append(rows)
         index1 += 1
         index2 = 0
     t2 = np.array(t2)
-    # print(t2)
-    # print(count)
+
     yy = []
     for c in t2:
         yy.append(c)
-    '''
-    x=1
-    count2 = []
-    segment = []
-    for g in t:
-        for f in g:
-            segment.append(x)
-        count2.append(segment)
-        segment = []
-        x += 1
-    count3 = []
-    for c in count2:
-        for d in c:
-            count3.append(d)
-    yy2 = []
-    for c in yy:
-        for d in c:
-           yy2.append(d) 
-    print(count3)
-    print(yy2)
+
+    averages = []
+    for values in s:
+        length = 0
+        total = 0
+        for num in values:
+            #num = str(num)
+            is_NaN = math.isnan(num)
+            if is_NaN != True:
+                total += num
+                length += 1
+        if length == 0:
+            averages.append(-3)
+        else:
+            average = total / length
+            averages.append(average)
+    #Creating an array that find the average grade for each assignment
     
-    x = np.array(count3)
-    y = np.array(yy2)
-    m, b = np.polyfit(x, y, 1)
-    '''
+    x=0
+    assignments = []
+    for g in t:
+        x += 1
+        assignments.append(x)
+    #Making an array that includes an integer corresponding to each assignment
+    
+    #Plotting the actual graph with an average line and titles
     plt.plot(count, yy, "o")
-    #plt.plot(x, m*x + b)
+    plt.plot(assignments, averages)
     plt.xlabel('Assignments')
     plt.ylabel('Grades')
     plt.title('Grades Throughout the School Year')
     plt.show()
 
     return ' '
-
-
-# print(gradesPlot(grades))
