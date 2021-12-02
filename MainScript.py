@@ -38,7 +38,7 @@ gradesfile = pd.read_csv(filename)
 #Creating a matrix from the CSV file
 gradesmatrix = np.array(gradesfile)
 grades = gradesmatrix[:,2:]
-print(Back.GREEN + 'Data Loaded successfully!'+ Style.RESET_ALL)
+print('Data Loaded successfully!')
 print(" ")
 print('Number of students:',np.size(grades[:,0]))
 print(" ")
@@ -57,7 +57,7 @@ while loop:
 #------1.Load Data------
 
     if selection == 1:
-        print(Back.GREEN + 'Load New Data has been selected!'+ Style.RESET_ALL)
+        print('Load New Data has been selected!')
         filename = input('Please enter the name of the CSV file you wish to use: ')
         while not(os.path.isfile(filename)):
             try:
@@ -71,7 +71,7 @@ while loop:
         #Creating a matrix from the CSV file
         gradesmatrix = np.array(gradesfile)
         grades = gradesmatrix[:,2:]
-        print(Back.GREEN + 'Data Loaded successfully!' + Style.RESET_ALL)
+        print('Data Loaded successfully!')
         print('Number of students: ',np.size(grades[:,0]))
         print('Number of Assignments: ',np.size(grades[0,:]))
         print(" ")
@@ -79,7 +79,7 @@ while loop:
 #----2.Check For Errors-----
     if selection == 2:
         #checking if there are student number repeats
-        print(Back.GREEN + 'Check For Errors as been selected!'+ Style.RESET_ALL)
+        print('Check For Errors as been selected!')
         x1 = input("Would you like to see if two students have the same student ID? ")
         while ((x1.lower()!='yes') and (x1.lower()!='no')):
             try: 
@@ -132,7 +132,7 @@ while loop:
     if selection == 3:
         print('Generate plots has been selected!')
         gradesPlot(grades)
-        print(Back.GREEN + "Grades have been plotted!"+ Style.RESET_ALL)
+        print("Grades have been plotted!")
         
 
 
@@ -140,7 +140,7 @@ while loop:
     if selection == 4:
         print('Display Grades has been selected!')
         tabulateGrades(gradesfile)
-        print(Back.GREEN + 'Grades have been displayed in a seperate browser window.'+ Style.RESET_ALL)
+        print('Grades have been displayed in a seperate browser window.')
 
 
 
