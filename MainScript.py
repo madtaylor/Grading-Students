@@ -10,7 +10,7 @@ from colorama import Back, Style
 from Grading_Students import gradesPlot
 from DisplayGradesTable import tabulateGrades
 
-#Function to display The user interface
+#Function to display the user interface
 def displayInterface():
     print(20*"-","Welcome to the action menu!",20*"-")
     print("1. Load New Data")
@@ -76,6 +76,7 @@ while loop:
         print(" ")
       
 #----2.Check For Errors-----
+    #Responsible Group Member: Isabella
     if selection == 2:
         #checking if there are student number repeats
         print('Check For Errors as been selected!')
@@ -89,7 +90,7 @@ while loop:
         if x1.lower()== "yes":
             df = pd.DataFrame(gradesfile, columns= ['StudentID'])
             notErrors = True 
-            #Oupouts duplicates found in the column "StudentID"
+            #Outputs duplicates found in the column "StudentID"
             if (duplicated := df.duplicated(keep=False)).any():
                 some_duplicates = df[duplicated].sort_values(by=df.columns.to_list()).head()
                 print("The student number(s) below has been found multiple times in the data: ", some_duplicates)
@@ -97,6 +98,7 @@ while loop:
             if notErrors == True:
                 print("No student numbers have been found to be repeated")
             elif notErrors == False:
+                #Outputs data with repeats removed
                 y1 = input("Would you like to remove the duplicated student IDs and display data with out repeats? " ) 
                 while ((y1.lower()!='yes') and (y1.lower()!='no')):
                      try: 
@@ -111,13 +113,14 @@ while loop:
         if x1.lower()== "no":
             pass
         
-        #checking to see if any grades do not fall on the 7 grade scale
+        #Checking to see if any grades do not fall on the 7 grade scale
         x2 = input("Would you like to see if any grades do not fall on the 7 grade scale? ")
         while ((x2.lower()!='yes') and (x2.lower()!='no')):
             try: 
                 x2=input(Back.RED + 'Error, please input yes or no: '+ Style.RESET_ALL)
             except ValueError:
                     pass
+        #Carry out function when yes 
         if x2.lower()== "yes":
             noError = True
             for i in grades.flatten():
@@ -128,6 +131,7 @@ while loop:
                 print("No invalid grade(s) have been found.")
 
 #-----3.Generate Plots-----
+    #Displays plots
     if selection == 3:
         print('Generate plots has been selected!')
         gradesPlot(grades)
@@ -136,6 +140,7 @@ while loop:
 
 
 #-----4.Display Table of Grades-----
+    #Displays table of grades 
     if selection == 4:
         print('Display Grades has been selected!')
         tabulateGrades(gradesfile)
@@ -144,6 +149,7 @@ while loop:
 
 
 #-----5.Quit-----
+    #Exits Program
     if selection == 5:
         print(" ")
         print("Thank you for using our program!")
