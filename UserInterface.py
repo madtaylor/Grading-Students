@@ -96,7 +96,7 @@ while loop:
             if notErrors == True:
                 print("No student numbers have been found to be repeated")
             if notErrors == False:
-                y1 = input("Would you like to remove the duplicated student IDs?") 
+                y1 = input("Would you like to remove the duplicated student IDs and display data with out repeats?") 
                 while ((y1.lower()!='yes') and (y1.lower()!='no')):
                      try: 
                          y1=input('Error, please input yes or no: ')
