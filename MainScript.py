@@ -2,10 +2,9 @@
 import numpy as np
 import pandas as pd
 import os.path
-from colorama import init, Back, Style
+from colorama import Back, Style
 
-init(autoreset=True, convert=True)
-os.system('cls' if os.name == 'nt' else 'clear')
+
 
 #Importing Functions
 from Grading_Students import gradesPlot
