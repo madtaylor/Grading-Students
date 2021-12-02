@@ -16,7 +16,7 @@ from Grading_Students import computeFinalGrades
 html_string = '''
 <html>
   <head><title>HTML Pandas Dataframe with CSS</title></head>
-  <!-- Linke to bootstrap CSS sheet to style the HTML table -->
+  <!-- Linked to bootstrap CSS sheet to style the HTML table -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   <body>
     {table}
@@ -40,6 +40,7 @@ def tabulateGrades(gradesfile):
     colno = len(gradesdf.columns)
     gradesdf.insert(colno, 'Final Grades',finalgrades)
     
+    gradesdf = gradesdf.sort_values('Name')
     #opens the HTML file index and writes the code for the table of data values using the CSS stylesheet to style the table and opens it in the user's browser.
     with open('index.html', 'w') as f:
         f.write(html_string \
