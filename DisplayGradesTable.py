@@ -39,15 +39,13 @@ def tabulateGrades(gradesfile):
     gradesdf.insert(colno, 'Final Grades',finalgrades)
     
     #sorts the dataframe alphabetically
-    gradesdf = gradesdf.sort_values('Name')
+    df = gradesdf.sort_values('Name')
     
     #opens the HTML file index and writes the code for the table of data values using the CSS stylesheet to style the table and opens it in the user's browser.
     with open('index.html', 'w') as f:
         f.write(html_string \
-         .format(table=gradesdf.to_html(classes='table table-hover')))
+         .format(table=df.to_html(classes='table table-hover')))
     webbrowser.open('index.html')
-    
-    print('A table has been plotted in a new browser window!')
     
     #deletes the column of final grades from the DataFrame so the function can run again
     del gradesdf['Final Grades']
