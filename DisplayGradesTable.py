@@ -11,8 +11,6 @@ import webbrowser
 #Importing Functions
 from Grading_Functions import computeFinalGrades
 
-
-
 #Template HTML string specifying CSS style sheet for the table to use 
 
 html_string = '''
@@ -25,8 +23,6 @@ html_string = '''
   </body>
 </html>.
 '''
-
-
 
 def tabulateGrades(gradesfile):
     
@@ -55,7 +51,3 @@ def tabulateGrades(gradesfile):
     
     #deletes the column of final grades from the DataFrame so the function can run again
     del gradesdf['Final Grades']
-
-
-
-    

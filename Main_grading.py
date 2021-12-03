@@ -63,6 +63,7 @@ while loop:
 
     if selection == 1:
         print('Load New Data has been selected!')
+        print(" ")
         filename = input('Please enter the name of the CSV file you wish to use: ')
         while not(os.path.isfile(filename)):
             try:
@@ -114,8 +115,7 @@ while loop:
                 if y1.lower() == "yes":
                     dropped_duplicates = df.drop_duplicates(subset=['StudentID'], keep='last')
                     print(dropped_duplicates)
-            
-                
+                     
         if x1.lower()== "no":
             pass
         
@@ -155,8 +155,5 @@ while loop:
     if selection == 5:
         print(" ")
         print("Thank you for using our program!")
-        print("Sincerely, Akira, Isabella and Madeleine 🙂")
+        print("Sincerely, Akira, Isabella, and Madeleine 🙂")
         break
-        
-        
-        
